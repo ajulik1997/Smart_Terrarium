@@ -3,7 +3,7 @@
 #include <Adafruit_SSD1306.h>   // LCD
 
 #include <Wire.h>               // I2C Communication
-#include "Battery.h"
+#include "Power.h"
 #include "lcd.h"
 #include "Multiplexer.h"
 #include "Soil.h"
@@ -38,15 +38,13 @@ void setup() {
   
   setup_rotary_encoder();
 
-  Multiplexer amux(A0, 3, 4, 5, 6);
-  Serial.println(amux.read_device(0));
-  Battery batt = Battery(3000, 4200, A1);
-  batt.begin(3300, 1.47, &sigmoidal);
+  Multiplexer amux(A0, 2, 3, 4, 5, 6);
+  Power hello(15, &amux);
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 10);
-  display.println(batt.level());
+  display.println(hello.battery_percentage);
   display.display(); 
 }
 
