@@ -2,9 +2,8 @@
 #include <Adafruit_GFX.h>       // Graphics Library
 #include <Adafruit_SSD1306.h>   // LCD
 
-#include <CD74HC4067.h>         // Analog Multiplexer
 #include <Wire.h>               // I2C Communication
-#include <Battery.h> 
+#include "Battery.h"
 #include "lcd.h"
 #include "Multiplexer.h"
 #include "Soil.h"
