@@ -39,12 +39,14 @@ void setup() {
   setup_rotary_encoder();
 
   Multiplexer amux(A0, 2, 3, 4, 5, 6);
-  Power hello(15, &amux);
+  Power battery(&amux, 15);
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 10);
-  display.println(hello.battery_percentage);
+  display.print("Battery: ");
+  display.print(battery.level);
+  display.print("%");
   display.display(); 
 }
 
