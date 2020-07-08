@@ -11,6 +11,7 @@ class Multiplexer
     int read_device(byte device_id);                                       // Reads analog value of device
 	void lock_enable();                                                    // Locks multiplexer in enabled mode
 	void unlock_enable();                                                  // Removes enable lock, allowing multiplexer to be disabled
+	void switch_to_device(byte device_id);                                 // Switches to device without reading from it
 	byte signal_pin;                                                       // Signal pin which receives analog data
 	byte enable_pin;                                                       // Enable pin, when driven high, disables multiplexer
   private:
