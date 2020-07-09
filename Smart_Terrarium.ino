@@ -45,10 +45,8 @@ void setup() {
   display.drawBitmap(113, 1, battery_full, 15, 10, 1);
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.setCursor(0, 10);
-  display.print("Battery: ");
+  display.setCursor(0, 0);
   display.print(battery.level);
-  display.print("%");
   display.display(); 
 }
 
