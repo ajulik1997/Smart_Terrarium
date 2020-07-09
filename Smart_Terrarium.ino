@@ -4,7 +4,7 @@
 
 #include <Wire.h>               // I2C Communication
 #include "Power.h"
-#include "lcd.h"
+#include "LCD_bitmaps.h"
 #include "Multiplexer.h"
 #include "Soil.h"
 
@@ -41,6 +41,8 @@ void setup() {
   Multiplexer amux(A0, 2, 3, 4, 5, 6);
   Power battery(&amux, 15);
   display.clearDisplay();
+  display.drawLine(0, 12, 127, 12, WHITE);
+  display.drawBitmap(113, 1, battery_full, 15, 10, 1);
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 10);
