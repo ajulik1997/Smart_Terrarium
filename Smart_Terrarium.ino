@@ -42,11 +42,23 @@ void setup() {
   Power battery(&amux, 15);
   display.clearDisplay();
   display.drawLine(0, 12, 127, 12, WHITE);
+  display.drawLine(0, 53, 127, 53, WHITE);
   display.drawBitmap(113, 1, battery_full, 15, 10, 1);
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.setCursor(0, 0);
-  display.print(battery.level);
+  display.setCursor(87, 2);
+  display.print("100%");
+  //display.print(battery.level);
+  //display.fillRect(0, 53, 51, 63, WHITE);
+  //display.setTextColor(BLACK);
+  display.drawLine(46, 53, 46, 63, WHITE);
+  display.drawLine(93, 53, 93, 63, WHITE);
+  display.setCursor(2, 55);
+  display.print("Details");
+  display.setCursor(50, 55);
+  display.print("Control");
+  display.setCursor(97, 55);
+  display.print("Light");
   display.display(); 
 }
 
