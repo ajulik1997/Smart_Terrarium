@@ -1,11 +1,8 @@
 #include <Adafruit_BMP280.h>    // Barometric Pressure Sensor
-#include <Adafruit_GFX.h>       // Graphics Library
-#include <Adafruit_SSD1306.h>   // LCD
 
-#include <Wire.h>               // I2C Communication
-#include "Power.h"
-#include "LCD_bitmaps.h"
+#include "LCD.h"
 #include "Multiplexer.h"
+#include "Power.h"
 #include "Soil.h"
 
 /* ===== DEFINE PIN NUMBERS ===== */
@@ -20,46 +17,19 @@ const byte RTENC_SW = 4;        // ROTARY ENCODER: Switch
 static uint8_t prevNextCode = 0;
 static uint16_t store=0;
 
-Adafruit_SSD1306 display(128, 64, &Wire, -1);
+LCD lcd(128, 64, -1);
 
 /* ===== STARTUP INIT ===== */
 
 void setup() {
   Serial.begin(9600);
-
-  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
-    Serial.println(F("SSD1306 allocation failed"));
-    for(;;);
-  }
-
-  display.clearDisplay();
-  display.drawBitmap(0, 0, splash_image, 128, 64, 1);
-  display.display();
+  lcd.show_splash();
   
   setup_rotary_encoder();
 
   Multiplexer amux(A0, 2, 3, 4, 5, 6);
   Power battery(&amux, 15);
-  display.clearDisplay();
-  display.drawLine(0, 12, 127, 12, WHITE);
-  display.drawLine(0, 53, 127, 53, WHITE);
-  display.drawBitmap(113, 1, battery_full, 15, 10, 1);
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.setCursor(87, 2);
-  display.print("100%");
-  //display.print(battery.level);
-  //display.fillRect(0, 53, 51, 63, WHITE);
-  //display.setTextColor(BLACK);
-  display.drawLine(46, 53, 46, 63, WHITE);
-  display.drawLine(93, 53, 93, 63, WHITE);
-  display.setCursor(2, 55);
-  display.print("Details");
-  display.setCursor(50, 55);
-  display.print("Control");
-  display.setCursor(97, 55);
-  display.print("Light");
-  display.display(); 
+  lcd.show_main_menu();
 }
 
 void setup_rotary_encoder() {
