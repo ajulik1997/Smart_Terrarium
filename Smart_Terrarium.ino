@@ -1,6 +1,7 @@
 #include <Adafruit_BMP280.h>    // Barometric Pressure Sensor
 
 #include "LCD.h"
+#include "Encoder.h"
 #include "Multiplexer.h"
 #include "Power.h"
 #include "Soil.h"
@@ -17,13 +18,18 @@ const byte RTENC_SW = 4;        // ROTARY ENCODER: Switch
 static uint8_t prevNextCode = 0;
 static uint16_t store=0;
 
-LCD lcd(128, 64, -1);
+Encoder encoder(2, 4, 3);
 
 /* ===== STARTUP INIT ===== */
 
 void setup() {
   Serial.begin(9600);
+  
+  LCD lcd(128, 64, -1);
   lcd.show_splash();
+  
+  
+  attachInterrupt(digitalPinToInterrupt(2), interrupt_encoder, CHANGE);
   
   setup_rotary_encoder();
 
@@ -80,4 +86,8 @@ int8_t read_rotary() {
       if ((store&0xff)==0x17) return 1;
    }
    return 0;
+}
+
+void interrupt_encoder() {
+	encoder.read_encoder();
 }
