@@ -15,7 +15,6 @@ Buzzer buzzer(11);
 Encoder encoder(2, 4, 3);
 LCD lcd(128, 64, -1);
 Multiplexer amux(A0, 2, 3, 4, 5, 6);
-Power battery(&amux, 15);
 
 /* ===== STARTUP INIT ===== */
 
@@ -26,8 +25,8 @@ void setup() {
   
   attachInterrupt(digitalPinToInterrupt(2), interrupt_encoder, CHANGE);
   attachInterrupt(digitalPinToInterrupt(3), interrupt_button, FALLING);
-
   
+  Power battery(&amux, 15);
   lcd.show_main_menu();
 }
 
@@ -39,9 +38,8 @@ void loop() {
 /* ===== INTERRUPT SERVICE ROUTINES ===== */
 
 void interrupt_encoder() {
-	encoder.read_encoder();
+  encoder.read_encoder();
 }
 
 void interrupt_button() {
-    
 }

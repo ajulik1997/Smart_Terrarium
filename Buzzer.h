@@ -15,7 +15,7 @@ class Buzzer
 	void play_decrement();												   // Click sound used in UI value decrement
 	void play_warning();												   // Longer click sound used as an action-not-allowed sound
   private:
-    byte _buzzer_pin														   // Buzzer PWM pin number
+    byte _buzzer_pin;														   // Buzzer PWM pin number
 };
 
 #endif
