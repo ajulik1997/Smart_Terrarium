@@ -9,6 +9,10 @@ LCD::LCD(int SCREEN_WIDTH, int SCREEN_HEIGHT, int OLED_RESET) : _display(SCREEN_
   // Constructor for LCD management class
   // SCREEN_WIDTH and SCREEN_HEIGHT define LCD screen dimensions
   // OLED_RESET defines the LCD reset pin (-1 if shared with Arduino)
+}
+
+void LCD::init() {
+  // Initializes LCD during startup
   if(!_display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
     Serial.println(F("SSD1306 allocation failed"));
     for(;;);
